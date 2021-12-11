@@ -12,7 +12,8 @@ class LinearFunctionOneDimensionalNoise:
         return self.a_0 + self.a_1*x
 
     def make_true_x(self, start=0, stop=10, step=0.5):
-        return np.array(np.arange(start, stop, step))
+        x_arr_true = np.array(np.arange(start, stop, step))
+        return x_arr_true
 
     def make_true_y(self, start=0, stop=10, step=0.5):
 
@@ -20,14 +21,6 @@ class LinearFunctionOneDimensionalNoise:
         y_arr = self.get_y(x_arr)
 
         return y_arr
-
-    # def uniform_noise(self, start=0, stop=10, step=0.5, low=-1, high=1):
-    #     x_arr = self.make_true_x(start, stop, step)
-    #     noise = np.random.uniform(low, high, x_arr.shape)
-    #     y_arr_noise = self.get_y(x_arr) + noise
-    #     intervals = np.ones(x_arr.shape) * (low+high)/2
-    #
-    #     return y_arr_noise, intervals
 
     def uni_normal_noise(self, start=0, stop=10, step=0.5, loc=0, scale=1):
 
@@ -87,14 +80,6 @@ class LinearFunctionTwoDimensionalNoise:
         y_arr = self.get_y(x_arr)
 
         return y_arr
-
-    # def uniform_noise(self, start=0, stop=10, step=0.5, low=-1, high=1):
-    #     x_arr = self.make_true_x(start, stop, step)
-    #     noise = np.random.uniform(low, high, x_arr.shape)
-    #     y_arr_noise = self.get_y(x_arr) + noise
-    #     intervals = np.ones(x_arr.shape) * (low+high)/2
-    #
-    #     return y_arr_noise, intervals
 
     def uni_normal_noise(self, start=0, stop=10, step=0.5, loc_x=0, scale_x=1, loc_y=0, scale_y=1):
 
