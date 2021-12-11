@@ -28,13 +28,38 @@ class LinearFunction:
 
         return y_arr_noise, intervals
 
-    def normal_noise(self, start=0, stop=10, step=0.5, loc=0, scale=1):
+    def uni_normal_noise(self, start=0, stop=10, step=0.5, loc=0, scale=1):
 
         x_arr = self.make_x(start, stop, step)
         noise = np.random.normal(loc, scale, x_arr.shape)
         y_arr_noise = self.get_y(x_arr) + noise
-        intervals = np.ones(x_arr.shape)*scale*3.5
-
-
+        intervals = np.ones(x_arr.shape)*scale*3.1
 
         return y_arr_noise, intervals
+
+    def normal_noise(self, start=0, stop=10, step=0.5, strategy='random', loc_list=np.empty(0),scales_list=np.empty(0)):
+
+        x_arr = self.make_x(start, stop, step)
+
+        if strategy == 'random':
+
+            scales_list = np.random.uniform(0, stop/10, x_arr.shape)
+            loc_list = np.zeros(x_arr.shape)
+
+        elif strategy == 'fixed':
+
+            if scales_list.shape != x_arr.shape:
+                raise AttributeError("scales_list don't match the shape of x_arr")
+            if loc_list.shape != x_arr.shape:
+                raise AttributeError("loc_list don't match the shape of x_arr")
+
+        noise = np.empty(0)
+        intervals = np.empty(0)
+
+        for loc,scale in zip(loc_list, scales_list):
+
+            noise = np.append(noise, np.random.normal(loc, scale))
+            intervals = np.append(intervals, 3.1*scale)
+
+
+        return x_arr, intervals
