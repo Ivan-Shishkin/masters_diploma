@@ -114,10 +114,11 @@ class TwoDimensionalNoiseOptimizer:
                 q_min = q_res
 
         self.a_1 = a_1_min
-        self.a_0 = res['x'][1]
+        self.a_0 = res_min['x'][1]
         self.res = res_min
         self.x  = x_noise - res_min['x'][2:]
         self.y = self.a_1*self.x + self.a_0
+
 
         return self
 
@@ -128,7 +129,6 @@ class TwoDimensionalNoiseOptimizer:
         return self.res
 
     def predict(self, x):
-
 
         reconstructed = LinearFunctionOneDimensionalNoise(a_0=self.a_0, a_1=self.a_1)
 
