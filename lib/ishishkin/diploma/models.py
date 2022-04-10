@@ -6,10 +6,22 @@ import numpy as np
 class LinearFunctionOneDimensionalNoise:
 
     def __init__(self, *, a_0=0, a_1=1):
+
+        """
+
+        :param a_0:
+        :param a_1:
+        """
         self.a_0 = a_0
         self.a_1 = a_1
 
     def get_y(self, x):
+
+        """
+
+        :param x:
+        :return:
+        """
         return self.a_0 + self.a_1 * x
 
     def make_true_x(self, start=0, stop=10, step=0.5):
@@ -88,7 +100,7 @@ class LinearFunctionTwoDimensionalNoise:
         noise_x = np.random.normal(loc_x, scale_x, x_arr_true.shape)
         x_arr_noise = x_arr_true + noise_x
 
-        noise_y = np.random.normal(loc_y, scale_y, x_arr_true.shape)
+        noise_y = np.random.normal(loc_y, scale_y, x_arr_noise.shape)
         y_arr_noise = self.get_y(x_arr_noise) + noise_y
 
         intervals_x = np.ones(x_arr_noise.shape) * scale_x * 3.1
