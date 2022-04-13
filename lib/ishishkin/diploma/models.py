@@ -117,10 +117,10 @@ class LinearFunctionTwoDimensionalNoise:
 
         if strategy == 'random':
 
-            scales_x_list = np.random.uniform(0, stop / 10, x_arr_true.shape)
+            scales_x_list = np.random.uniform(0, stop / 100, x_arr_true.shape)
             loc_x_list = np.zeros(x_arr_true.shape)
 
-            scales_y_list = np.random.uniform(0, stop / 10, x_arr_true.shape)
+            scales_y_list = np.random.uniform(0, stop / 25, x_arr_true.shape)
             loc_y_list = np.zeros(x_arr_true.shape)
 
         elif strategy == 'fixed':
