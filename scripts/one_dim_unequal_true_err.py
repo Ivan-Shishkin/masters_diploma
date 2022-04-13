@@ -36,7 +36,11 @@ res = optimizer.get_res()
 def func(x, a_1, a_0):
     return a_1*x + a_0
 
-popt, pcov = curve_fit(func, x_true, y_noise, sigma=1./(intervals_y*intervals_y))
+
+popt_with_errs, pcov_with_errs = curve_fit(func, x_true, y_noise, sigma=1./(intervals_y*intervals_y))
+y_ols_with_errs = func(x_true, popt_with_errs[0], popt_with_errs[1])
+
+popt, pcov = curve_fit(func, x_true, y_noise)
 y_ols = func(x_true, popt[0], popt[1])
 
 # save data
@@ -46,12 +50,13 @@ df_points = pd.DataFrame(data={'x_true': x_true,
                                'y_noise': y_noise,
                                'y_err': intervals_y,
                                'y_rec': y_rec,
-                               'y_ols': y_ols})
+                               'y_ols': y_ols,
+                               'y_ols_with_errs': y_ols_with_errs})
 
-df_params = pd.DataFrame(data={'a_0': [a_0, res['x'][2], popt[1]],
-                               'a_1': [a_1, res['x'][1], popt[0]],
-                               'q': [np.nan, res['x'][0], np.nan]},
-                         index=['true', 'reconstructed', 'ols'])
+df_params = pd.DataFrame(data={'a_0': [a_0, res['x'][2], popt[1], popt_with_errs[1]],
+                               'a_1': [a_1, res['x'][1], popt[0], popt_with_errs[0]],
+                               'q': [np.nan, res['x'][0], np.nan, np.nan]},
+                         index=['true', 'reconstructed', 'ols', 'ols_with_errs'])
 
 
 writer = pd.ExcelWriter('../data/one_dimensional_unequal_true_errs.xlsx', engine='xlsxwriter')
