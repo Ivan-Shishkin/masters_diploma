@@ -60,7 +60,7 @@ class TwoDimensionalNoiseOptimizer:
         self.a1_bounds = a1_bounds
 
 
-    def fit(self, x_noise, intervals_x, y_noise, intervals_y, a1_steps=10, verbose=0):
+    def fit(self, x_noise, intervals_x, y_noise, intervals_y, a1_steps=10, verbose=0, force_mute = False):
 
         min_a1 = self.a1_bounds[0]
         max_a1 = self.a1_bounds[1]
@@ -101,9 +101,9 @@ class TwoDimensionalNoiseOptimizer:
 
             if q_res < q_min:
 
-                if verbose > 0:
+                if verbose > 2:
                     print(res)
-                else:
+                elif not force_mute:
                     print(q_res)
                     print(f"a1 = {a_1: .4f}")
                     print(res['message'])
@@ -118,6 +118,9 @@ class TwoDimensionalNoiseOptimizer:
         self.res = res_min
         self.x  = x_noise - res_min['x'][2:]
         self.y = self.a_1*self.x + self.a_0
+
+        if verbose > 1:
+            print(f"a_1 = {self.a_1}; a_0 = {self.a_0}; q = {q_min}")
 
 
         return self
