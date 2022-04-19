@@ -76,7 +76,7 @@ class TwoDimensionalNoiseOptimizer:
             l = np.append([1, 0], np.zeros(intervals_x.shape))
             A = []
             b = []
-            bounds_list = [(0,1), (None, None)]
+            bounds_list = [(None, None), (None, None)]
 
             for i, (x_i, sigma_i, y_i, tau_i) in enumerate(zip(x_noise, intervals_x, y_noise, intervals_y)):
                 m_list = np.zeros(intervals_x.shape)
@@ -115,7 +115,10 @@ class TwoDimensionalNoiseOptimizer:
 
         self.a_1 = a_1_min
         self.a_0 = res_min['x'][1]
+
         self.res = res_min
+        self.q = res_min['x'][0]
+
         self.x  = x_noise - res_min['x'][2:]
         self.y = self.a_1*self.x + self.a_0
 

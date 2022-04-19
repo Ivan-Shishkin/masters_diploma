@@ -8,7 +8,7 @@ class RobbinsMonroeGranular:
 
         self.early_stop = early_stop
         self.eps = eps
-        self.init_g_list = g_list
+        self.init_g_list = np.array(g_list)
         self.g_num = g_num
         self.a = a
         self.max_tries = max_tries
@@ -109,10 +109,10 @@ class RobbinsMonroeGranular:
                 print(f"measure of g{num + 1} = {chi_list[num].mean()}")
                 print()
 
-        self.g_list = g_list
-        self.granulas_mes = granulas_mes_list
+        self.g_list = np.array(g_list)
+        self.granulas_mes = np.array(granulas_mes_list)
 
-        self.xi_list = xi_list
+        self.xi_list = np.array(xi_list)
         self.chi_list = np.array(chi_list).T
         self.g_values = np.array(g_values_list).T
 
