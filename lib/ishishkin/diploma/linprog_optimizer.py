@@ -4,7 +4,7 @@ import numpy as np
 
 class OneDimensionalNoiseOptimizer:
 
-    def __init__(self, q_bounds = (None, None), a0_bounds=(None,None), a1_bounds=(None, None)):
+    def __init__(self, q_bounds = (None, None), a0_bounds=(None,None), a1_bounds=(0.9, 1.1)):
 
         self.q_bounds = q_bounds
         self.a0_bounds = a0_bounds
@@ -31,6 +31,8 @@ class OneDimensionalNoiseOptimizer:
             print(res['message'])
 
         self.res = res
+        self.a_0 = self.res['x'][2]
+        self.a_1 = self.res['x'][1]
 
         return self
 

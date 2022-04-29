@@ -13,7 +13,7 @@ class RobbinsMonroeGranular:
         self.a = a
         self.max_tries = max_tries
 
-    def normal_granular(self, mu):
+    def normal_granular(self, mu, sample_scale):
 
         # loop stop conditions
         early_stop = self.early_stop
@@ -41,7 +41,7 @@ class RobbinsMonroeGranular:
         while eps_max >= eps:
 
             # random variable realisation
-            xi = np.random.randn()
+            xi = np.random.normal(loc=0.0, scale=sample_scale)
             xi_list = np.append(xi_list, xi)
 
             # granulas adjustment
@@ -84,7 +84,7 @@ class RobbinsMonroeGranular:
 
                         if g_i < 0:
                             invalid_value = g_i
-                            g_i = 10**(-8)/(num+1)
+                            g_i = 10**(-4)/(num+1)
                             g_list[num] = g_i
                             print(f"Invalid value {invalid_value} of granula number {num+1} were set to {g_i}")
 
