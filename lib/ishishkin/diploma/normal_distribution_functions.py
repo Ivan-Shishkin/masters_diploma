@@ -2,7 +2,7 @@ import numpy as np
 
 # granular propose
 
-def phi_func(x, mu):
+def phi_func(x, mu=0):
     return np.exp(-(x - mu) ** 2)
 
 

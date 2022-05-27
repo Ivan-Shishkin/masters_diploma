@@ -42,6 +42,12 @@ class RobbinsMonroeGranular:
 
             # random variable realisation
             xi = np.random.normal(loc=0.0, scale=sample_scale)
+
+            if xi > sample_scale:
+                xi = 0
+            else:
+                pass
+
             xi_list = np.append(xi_list, xi)
 
             # granulas adjustment

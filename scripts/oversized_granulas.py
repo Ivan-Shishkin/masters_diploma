@@ -5,11 +5,11 @@ from lib.ishishkin.diploma.granular import RobbinsMonroeGranular
 
 
 # количество гранул
-granules_num = 5
+granules_num = 8
 
 
 # условия остановки алгоритма
-early_stop = 10**4
+early_stop = 10**5
 k = 1
 eps_max = np.inf
 eps = 0.01
@@ -18,7 +18,7 @@ eps = 0.01
 mu = 0
 
 # вероятность ошибки первого рода
-a = 1.01
+a = 1.001
 
 # коэффициенты ряда Роббинса Монро
 alpha = 1
@@ -29,11 +29,13 @@ chi_list = []
 xi_list = np.empty(0)
 
 for num in range(0, granules_num):
-  init_g_list.append(phi_func(num*2, mu))
-  chi_list.append(np.empty(0))
+    g_i = phi_func(3+num/10)
+
+    init_g_list.append(phi_func(g_i, mu))
+    chi_list.append(np.empty(0))
 
 granulator = RobbinsMonroeGranular(granules_num, init_g_list, eps, early_stop, a)
-granulator.normal_granular(mu)
+granulator.normal_granular(mu, 1)
 
 print(f"init g = {granulator.init_g_list}")
 print(f"adjusted g = {granulator.g_list}")
